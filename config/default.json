@@ -1,0 +1,5 @@
+{
+    "mongoURI": "mongodb+srv://pokreniseweb:cEIpo6NvMbwPuKDj@mern-atjxs.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
+}
+
