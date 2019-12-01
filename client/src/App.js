@@ -5,20 +5,25 @@ import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import './App.css';
+//Redux
+import { Provider } from 'react-redux';
+import store from './store';
 
 const App = () => {
 	return (
 		//fragment is ghost element that wont get rendered in the DOM
-		<Router>
-			<Fragment>
-				<NavBar />
-				<Switch>
-					<Route exact path="/" component={Landing} />
-					<Route exact path="/register" component={Register} />
-					<Route exact path="/login" component={Login} />
-				</Switch>
-			</Fragment>
-		</Router>
+		<Provider store={store}>
+			<Router>
+				<Fragment>
+					<NavBar />
+					<Switch>
+						<Route exact path="/" component={Landing} />
+						<Route exact path="/register" component={Register} />
+						<Route exact path="/login" component={Login} />
+					</Switch>
+				</Fragment>
+			</Router>
+		</Provider>
 	);
 };
 

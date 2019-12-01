@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { builtinModules } from 'module';
+
 function Register(props) {
 	//we are using useState in functional components to handle state for this component
 	//formData is {} that will hold data values, and setFormData will emulate setState
@@ -24,8 +25,8 @@ function Register(props) {
 		e.preventDefault();
 		if (password !== password2) {
 			console.log('Passwords do not match');
-			//we will make redux actions to send data to backend, but for now we will do it like this
-			//for testing purposes
+			//we will make redux actions to send data to backend, but for now 
+			//we will do it like this for testing purposes
 		} else {
 			const newUser = {
 				name,
@@ -56,12 +57,26 @@ function Register(props) {
 				<p className="lead">
 					<i className="fa fa-user" /> Create Your Account
 				</p>
-				<form onSubmit={(e) => onSubmit(e)} className="form" autoComplete="none">
+        <form 
+        onSubmit={(e) => onSubmit(e)} 
+        className="form" 
+        autoComplete="none">
 					<div className="form-group">
-						<input value={name} onChange={(e) => onChange(e)} type="text" placeholder="Name" name="name" required />
+            <input 
+            value={name} 
+            onChange={(e) => onChange(e)} 
+            type="text" 
+            placeholder="Name" 
+            name="name" 
+            required />
 					</div>
 					<div className="form-group">
-						<input value={email} onChange={(e) => onChange(e)} type="email" placeholder="Email Address" name="email" />
+            <input 
+            value={email} 
+            onChange={(e) => onChange(e)} 
+            type="email" 
+            placeholder="Email Address" 
+            name="email" />
 						<small className="form-text">
 							This site uses Gravatar so if you want a profile image, use a Gravatar email
 						</small>
@@ -89,7 +104,7 @@ function Register(props) {
 					<input type="submit" className="btn btn-primary" value="Register" />
 				</form>
 				<p className="my-1">
-					Already have an account? <a href="login.html">Sign In</a>
+					Already have an account? <Link to="/login">Sign In</Link>
 				</p>
 			</section>
 		</div>
