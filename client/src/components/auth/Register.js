@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import  setAlert  from '../../actions/alert';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
-function Register(props) {
+function Register({ setAlert }) {
 	//we are using useState in functional components to handle state for this component
 	//formData is {} that will hold data values, and setFormData will emulate setState
 	//like in class based components, useState will take objeckt with default values
@@ -24,7 +27,7 @@ function Register(props) {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		if (password !== password2) {
-			console.log('Passwords do not match');
+			setAlert('Passwords do not match', 'danger');
 			//we will make redux actions to send data to backend, but for now 
 			//we will do it like this for testing purposes
 		} else {
@@ -111,4 +114,8 @@ function Register(props) {
 	);
 }
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+}
+
+export default connect(null, {setAlert}) (Register);
