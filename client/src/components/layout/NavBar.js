@@ -6,7 +6,7 @@ function NavBar(props) {
 		<nav className="navbar bg-dark">
 			<h1>
 				<Link to="/">
-					<i className="fa fa-code" /> DevConnector
+					<i className="fa fa-code" /> DevConnectorApp
 				</Link>
 			</h1>
 			<ul>
