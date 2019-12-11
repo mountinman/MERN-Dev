@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import  setAlert  from '../../actions/alert';
-import axios from 'axios';
+import  regUser  from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-function Register({ setAlert }) {
+function Register({ setAlert, regUser }) {
 	//we are using useState in functional components to handle state for this component
 	//formData is {} that will hold data values, and setFormData will emulate setState
 	//like in class based components, useState will take objeckt with default values
@@ -31,25 +31,7 @@ function Register({ setAlert }) {
 			//we will make redux actions to send data to backend, but for now 
 			//we will do it like this for testing purposes
 		} else {
-			const newUser = {
-				name,
-				email,
-				password
-			};
-			try {
-				const config = {
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				};
-				const body = JSON.stringify(newUser);
-				const res = await axios.post('/api/users', body, config);
-				//here on registration route we get the token ( on route api/users )
-				//which we'll use to access protected routes
-				console.log(res.data);
-			} catch (error) {
-				console.error(error.response.data);
-			}
+			regUser({ name, email, password })
 		}
 	};
 
@@ -71,7 +53,7 @@ function Register({ setAlert }) {
             type="text" 
             placeholder="Name" 
             name="name" 
-            required />
+             />
 					</div>
 					<div className="form-group">
             <input 
@@ -91,7 +73,8 @@ function Register({ setAlert }) {
 							type="password"
 							placeholder="Password"
 							name="password"
-							minLength="6"
+              
+              
 						/>
 					</div>
 					<div className="form-group">
@@ -101,7 +84,8 @@ function Register({ setAlert }) {
 							type="password"
 							placeholder="Confirm Password"
 							name="password2"
-							minLength="6"
+              
+              
 						/>
 					</div>
 					<input type="submit" className="btn btn-primary" value="Register" />
@@ -116,6 +100,7 @@ function Register({ setAlert }) {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  regUser: PropTypes.func.isRequired
 }
 
-export default connect(null, {setAlert}) (Register);
+export default connect(null, {setAlert, regUser}) (Register);

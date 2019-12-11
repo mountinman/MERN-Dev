@@ -16,7 +16,9 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<NavBar />
-				<Alert />
+				<div className="container">
+					<Alert />
+				</div>
 				<Switch>
 					<Route exact path="/" component={Landing} />
 					<Route exact path="/register" component={Register} />
