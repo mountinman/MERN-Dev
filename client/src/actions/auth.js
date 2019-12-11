@@ -10,7 +10,7 @@ const regUser = ({ name, email, password }) => async dispatch => {
   }
   const body = JSON.stringify({ name, email, password });
   try {
-    const res = await axios.post('/api/users', config, body)
+    const res = await axios.post('/api/users', body, config)
     dispatch({
       type: REG_SUCCESS,
       payload: res.data
