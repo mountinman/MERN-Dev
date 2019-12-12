@@ -1,8 +1,26 @@
 import axios from 'axios';
-import { REG_SUCCESS, REG_FAIL } from './types';
-import setAlert from './alert';
+import { REG_SUCCESS, REG_FAIL, USER_LOADED, AUTH_ERROR } from './types';
+import { setAlert } from './alert';
+import { setAuthToken } from '../helpers/setAuthToken';
 
-const regUser = ({ name, email, password }) => async dispatch => {
+export const loadUser = () => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+  }
+  try {
+    const res = await axios.get('/api/auth');
+    dispatch({
+      type:USER_LOADED,
+      payload:res.data
+    })
+  } catch (error) {
+    dispatch({
+      type:AUTH_ERROR
+    })
+  }
+}
+
+export const regUser = ({ name, email, password }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -17,7 +35,6 @@ const regUser = ({ name, email, password }) => async dispatch => {
     })
   } catch (error) {
     const errors = error.response.data.errors
-    console.log(errors)
     if(errors){
       errors.forEach(err => {
         dispatch(setAlert(err.msg, 'danger'))
@@ -29,4 +46,3 @@ const regUser = ({ name, email, password }) => async dispatch => {
   }
 }
 
-export default regUser;
