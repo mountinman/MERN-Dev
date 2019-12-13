@@ -32,7 +32,7 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<NavBar />
-				<div className="container">
+				<div className="alert-container">
 					<Alert />
 				</div>
 				<Switch>

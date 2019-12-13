@@ -6,12 +6,11 @@ import { logout } from '../../actions/auth';
 
 function NavBar({ auth: { isAuth, loading }, logout }) {
   
-  
   const authLinks = (
 		<ul>
 			<li>
 				<a onClick={logout} href="#!">
-					<i className="fa fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
+					<i className="fa fa-sign-out" /> <span className="hide-sm">Logout</span>
 				</a>
 			</li>
 		</ul>

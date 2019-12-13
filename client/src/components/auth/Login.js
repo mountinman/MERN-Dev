@@ -4,15 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logUser } from '../../actions/auth';
 
-function Login ({ logUser, isAuth }) {
+function Login({ logUser, isAuth }) {
 	//we are using useState in functional components to handle state for this component
 	//formData is {} that will hold data values, and setFormData will emulate setState
 	//like in class based components, useState will take objeckt with default values
 	const [ formData, setFormData ] = useState({
-		
 		email: '',
-		password: '',
-		
+		password: ''
 	});
 
 	const { email, password } = formData;
@@ -24,13 +22,13 @@ function Login ({ logUser, isAuth }) {
 		});
 
 	const onSubmit = async (e) => {
-    e.preventDefault();
-    logUser({email, password})
-  };
-  
-  if(isAuth){
-    return <Redirect to="/dashoboard" />
-  }
+		e.preventDefault();
+		logUser({ email, password });
+	};
+
+	if (isAuth) {
+		return <Redirect to="/dashboard" />;
+	}
 
 	return (
 		<div className="container">
@@ -40,7 +38,6 @@ function Login ({ logUser, isAuth }) {
 					<i className="fa fa-user" /> Log In To Your Account
 				</p>
 				<form onSubmit={(e) => onSubmit(e)} className="form" autoComplete="none">
-					
 					<div className="form-group">
 						<input value={email} onChange={(e) => onChange(e)} type="email" placeholder="Email Address" name="email" />
 						<small className="form-text">
@@ -57,22 +54,21 @@ function Login ({ logUser, isAuth }) {
 							minLength="6"
 						/>
 					</div>
-					
+
 					<input type="submit" className="btn btn-primary" value="Log In" />
 				</form>
-				
 			</section>
 		</div>
 	);
 }
 
 Login.propTypes = {
-  logUser: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool,
-}
+	logUser: PropTypes.func.isRequired,
+	isAuth: PropTypes.bool
+};
 
-const mapStateToProps = state => ({
-  isAuth: state.auth.isAuth
-})
+const mapStateToProps = (state) => ({
+	isAuth: state.auth.isAuth
+});
 
 export default connect(mapStateToProps, { logUser })(Login);
