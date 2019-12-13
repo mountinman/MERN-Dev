@@ -32,10 +32,8 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<NavBar />
-				<div className="alert-container">
-					<Alert />
-				</div>
-				<Switch>
+          <Alert />
+          <Switch>
 					<Route exact path="/" component={Landing} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/login" component={Login} />

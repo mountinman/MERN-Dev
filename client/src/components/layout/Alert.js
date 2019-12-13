@@ -6,14 +6,16 @@ const mapStateToProps = (state) => ({
 	alerts: state.alert
 });
 
-const Alert = ({ alerts }) =>
-	alerts !== null &&
-	alerts.length > 0 &&
-	alerts.map((alert) => (
+const Alert = ({ alerts }) => {
+	alert = alerts !== null &&
+		alerts.length > 0 &&
+		alerts.map((alert) => (
 			<div key={alert.id} className={`alert alert-${alert.alertType}`}>
 				{alert.msg}
-		</div>
-	));
+			</div>
+		));
+	return !alerts.length <= 0 ? (<div className="alert-container">{alert}</div>) : null;
+};
 
 Alert.propTypes = {
 	alerts: PropTypes.array.isRequired
