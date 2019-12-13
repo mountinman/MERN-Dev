@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logUser } from '../../actions/auth';
 
 function Login({ logUser, isAuth }) {
-	//we are using useState in functional components to handle state for this component
-	//formData is {} that will hold data values, and setFormData will emulate setState
-	//like in class based components, useState will take objeckt with default values
+	
 	const [ formData, setFormData ] = useState({
 		email: '',
 		password: ''
@@ -57,6 +55,9 @@ function Login({ logUser, isAuth }) {
 
 					<input type="submit" className="btn btn-primary" value="Log In" />
 				</form>
+				<p className="my-1">
+					Don't have an account? <Link to="/register">Sign Up</Link>
+				</p>
 			</section>
 		</div>
 	);

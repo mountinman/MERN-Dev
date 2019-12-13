@@ -9,9 +9,9 @@ function NavBar({ auth: { isAuth, loading }, logout }) {
   const authLinks = (
 		<ul>
 			<li>
-				<a onClick={logout} href="#!">
+				<Link onClick={logout}>
 					<i className="fa fa-sign-out" /> <span className="hide-sm">Logout</span>
-				</a>
+				</Link>
 			</li>
 		</ul>
 	);
