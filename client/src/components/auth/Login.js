@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logUser } from '../../actions/auth';
 
-function Login(props) {
+function Login ({ logUser, isAuth }) {
 	//we are using useState in functional components to handle state for this component
 	//formData is {} that will hold data values, and setFormData will emulate setState
 	//like in class based components, useState will take objeckt with default values
@@ -20,9 +24,13 @@ function Login(props) {
 		});
 
 	const onSubmit = async (e) => {
-		e.preventDefault();
-		console.log('SUCCESS!')
-	};
+    e.preventDefault();
+    logUser({email, password})
+  };
+  
+  if(isAuth){
+    return <Redirect to="/dashoboard" />
+  }
 
 	return (
 		<div className="container">
@@ -58,4 +66,13 @@ function Login(props) {
 	);
 }
 
-export default Login;
+Login.propTypes = {
+  logUser: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool,
+}
+
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, { logUser })(Login);

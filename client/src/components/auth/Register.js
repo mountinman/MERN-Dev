@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import  { setAlert }  from '../../actions/alert';
 import  { regUser }  from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-function Register({ setAlert, regUser }) {
+function Register({ setAlert, regUser, isAuth }) {
 	//we are using useState in functional components to handle state for this component
 	//formData is {} that will hold data values, and setFormData will emulate setState
 	//like in class based components, useState will take objeckt with default values
@@ -33,7 +33,11 @@ function Register({ setAlert, regUser }) {
 		} else {
 			regUser({ name, email, password })
 		}
-	};
+  };
+  
+  if (isAuth) {
+    return <Redirect to="/dashboard" />
+  }
 
 	return (
 		<div className="container">
@@ -100,7 +104,12 @@ function Register({ setAlert, regUser }) {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  regUser: PropTypes.func.isRequired
+  regUser: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool,
 }
 
-export default connect(null, {setAlert, regUser}) (Register);
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {setAlert, regUser}) (Register);
